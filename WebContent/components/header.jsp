@@ -12,7 +12,7 @@
               <div class="navbar-nav">
                 <a class="nav-link" href="auth-form.jsp">Identificarme</a>
                 <a class="nav-link" href="auth-form.jsp?register=true">Registrarme</a>
-                <a class="nav-link disabled">Ver Cesta</a>
+                <a class="nav-link" href="./order">Ver Cesta</a>
               </div>
             </div>
           </div>

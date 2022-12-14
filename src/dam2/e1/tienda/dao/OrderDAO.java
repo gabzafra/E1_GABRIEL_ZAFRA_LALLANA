@@ -11,22 +11,26 @@ import dam2.e1.tienda.model.Order;
 import dam2.e1.tienda.model.Product;
 
 public class OrderDAO {
+  private static OrderDAO instance;
   // En este ejercicio no se contempla mantener un registro de los
   // pedidos realizados por cada cliente. Así que solo consideramos
   // la existencia de un solo pedido con id = 1
   private final Order ORDER_DATA;
 
-  public OrderDAO() {
+  private OrderDAO() {
     ORDER_DATA = new Order();
     ORDER_DATA.setId(1);
   }
 
-  public Order getOrderById(int id) {
-    if (ORDER_DATA.getId() == id) {
-      return deepCloneOrder(ORDER_DATA);
-    } else {
-      return new Order();
+  public static OrderDAO getInstance() {
+    if (instance == null) {
+      instance = new OrderDAO();
     }
+    return instance;
+  }
+
+  public Order getOrder() {
+    return deepCloneOrder(ORDER_DATA);
   }
 
   public Order updateOrder(Order order) {
@@ -40,19 +44,10 @@ public class OrderDAO {
     }
   }
 
-  public Order createNewOrder() {
+  public boolean resetOrder() {
     ORDER_DATA.setProductList(new HashMap<Integer, Product>());
     ORDER_DATA.setOwner(new Client());
-    return deepCloneOrder(ORDER_DATA);
-  }
-
-  public boolean deleteOrder(Order order) {
-    if (ORDER_DATA.getId() == order.getId()) {
-      ORDER_DATA.setProductList(new HashMap<Integer, Product>());
-      ORDER_DATA.setOwner(new Client());
-      return true;
-    }
-    return false;
+    return true;
   }
 
   private Order deepCloneOrder(Order order) {

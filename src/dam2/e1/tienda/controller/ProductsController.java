@@ -38,7 +38,7 @@ public class ProductsController extends HttpServlet {
       throws ServletException, IOException {
     initBackServices(request);
 
-    HashMap<Integer, Product> productList = pService.getAllProducts();
+    HashMap<Integer, Product> productList = pService.getProductsInStock();
 
     request.setAttribute("list", productList);
     request.getRequestDispatcher("index.jsp").forward(request, response);
