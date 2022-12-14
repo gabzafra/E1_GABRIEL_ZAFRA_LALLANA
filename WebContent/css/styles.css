@@ -3,9 +3,6 @@
 .alert-danger {
 	width: 600px;
 }
-.contact {
+.auth {
 	width: 500px;
-}
-.contact textarea {
-	min-height: 100px;
 }
