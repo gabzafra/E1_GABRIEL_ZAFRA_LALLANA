@@ -43,9 +43,11 @@ public class ProductDAO {
       }
     }
     if (isEmpty) {
-      createNewProduct(new Product(getNewId(), "producto1", "la desc 1", 1.11, 11));
-      createNewProduct(new Product(getNewId(), "producto2", "la desc 2", 2.22, 22));
-      createNewProduct(new Product(getNewId(), "producto3", "la desc 3", 3.33, 33));
+      createNewProduct(new Product(getNewId(), "judias", "la desc 1", 1.11, 11));
+      createNewProduct(new Product(getNewId(), "cerveza", "la desc 2", 2.22, 22));
+      createNewProduct(new Product(getNewId(), "lechuga", "la desc 3", 3.33, 33));
+      createNewProduct(new Product(getNewId(), "leche", "la desc 4", 4.33, 43));
+      createNewProduct(new Product(getNewId(), "yogourt", "la desc 5", 5.33, 53));
     }
   }
 

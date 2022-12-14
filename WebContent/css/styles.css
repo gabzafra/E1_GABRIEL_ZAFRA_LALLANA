@@ -6,3 +6,12 @@
 .auth {
 	width: 500px;
 }
+
+.product-container {
+	margin: 0 auto;
+	max-width: 70%;
+}
+
+.product {
+	margin: 10px;
+}
