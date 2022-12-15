@@ -5,7 +5,7 @@ package dam2.e1.tienda.config;
 
 public final class WebConfig {
   private static WebConfig instance;
-  private String globalPath = "";
+  private String globalPath;
 
   private WebConfig() {}
 

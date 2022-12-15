@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dam2.e1.tienda.config.WebConfig;
+import dam2.e1.tienda.model.Client;
 import dam2.e1.tienda.model.Order;
 import dam2.e1.tienda.service.OrderService;
 
@@ -37,7 +38,12 @@ public class OrdersController extends HttpServlet {
       oService.addProductToOrder(Integer.parseInt(productId));
       request.getRequestDispatcher("./").forward(request, response);
     } else if (request.getParameter("clear") != null) {
-      oService.resetOrder();
+      Client client = oService.getOrder().getOwner();
+      if (client.getId() > 0) {
+        oService.resetOrder(client);
+      } else {
+        oService.resetOrder();
+      }
       request.getRequestDispatcher("./").forward(request, response);
     } else if (request.getParameter("complete") != null) {
       Order currentOrder = oService.getOrder();
@@ -45,7 +51,7 @@ public class OrdersController extends HttpServlet {
       if (currentOrder.getOwner().getId() > 0) {
         oService.completeOrder();
         oService.generatePdfInvoice();
-        oService.resetOrder();
+        oService.resetOrder(currentOrder.getOwner());
         // TODO enviar este request al pdf
         request.getRequestDispatcher("./").forward(request, response);
       } else {
@@ -57,6 +63,10 @@ public class OrdersController extends HttpServlet {
 
       Order order = oService.getOrder();
 
+      Client client = oService.getOrder().getOwner();
+      if (client.getId() > 0) {
+        request.setAttribute("clientName", client.getName());
+      }
       request.setAttribute("productsNumber", oService.getNumOfItems());
       request.setAttribute("orders", order.getProductList());
       request.getRequestDispatcher("order.jsp").forward(request, response);

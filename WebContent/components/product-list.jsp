@@ -8,6 +8,7 @@
                             <div class="card-header display-6 text-capitalize">${product.value.name}</div>
                 <img src="./img/${product.value.name}.jpg" class="card-img-top w-75 mx-auto mt-2" alt="${product.value.name}">
                 <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">Quedan ${product.value.stock} unidades</h6>
                     <p class="card-text">${product.value.description}</p>
                     <p class="display-5">${product.value.price}€</p>
                     <a href="./order?id=${product.value.id}" class="btn btn-success">Añadir a la cesta</a>

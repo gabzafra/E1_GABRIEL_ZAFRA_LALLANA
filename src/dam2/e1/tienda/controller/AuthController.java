@@ -37,8 +37,17 @@ public class AuthController extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     initBackServices(request);
-    oService.resetOrder();
-    response.sendRedirect(request.getContextPath());
+    if (request.getParameter("exit") != null) {
+      oService.resetOrder();
+      response.sendRedirect(request.getContextPath());
+    } else if (request.getParameter("register") != null) {
+      request.setAttribute("productsNumber", oService.getNumOfItems());
+      request.getRequestDispatcher("auth-form.jsp?register=true").forward(request, response);
+    } else {
+      request.setAttribute("productsNumber", oService.getNumOfItems());
+      request.getRequestDispatcher("auth-form.jsp").forward(request, response);
+    }
+
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,6 +66,7 @@ public class AuthController extends HttpServlet {
         request.setAttribute("error", errorMsg);
         request.setAttribute("client", client);
         request.setAttribute("register", true);
+        request.setAttribute("productsNumber", oService.getNumOfItems());
         request.getRequestDispatcher("auth-form.jsp").forward(request, response);
       }
     } else {
@@ -64,10 +74,15 @@ public class AuthController extends HttpServlet {
       if (errorMsg.isEmpty()) {
         client = cService.getClientByEmail(client.getEmail());
         oService.asignClient(client);
-        response.sendRedirect(request.getContextPath());
+        if (oService.getNumOfItems() > 0) {
+          response.sendRedirect(request.getContextPath() + "/order");
+        } else {
+          response.sendRedirect(request.getContextPath());
+        }
       } else {
         request.setAttribute("error", errorMsg);
         request.setAttribute("client", client);
+        request.setAttribute("productsNumber", oService.getNumOfItems());
         request.getRequestDispatcher("auth-form.jsp").forward(request, response);
       }
 

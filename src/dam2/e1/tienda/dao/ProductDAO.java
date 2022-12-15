@@ -23,6 +23,9 @@ public class ProductDAO {
     initDAO();
     tempFile = new File(WebConfig.getConfig().getGlobalPath() + File.separator + "files"
         + File.separator + "temp.txt");
+    System.out.println(localFile);
+    System.out.println(tempFile);
+    System.out.println(WebConfig.getConfig().getGlobalPath());
     initDAO();
   }
 

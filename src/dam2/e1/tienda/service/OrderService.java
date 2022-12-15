@@ -26,7 +26,7 @@ public class OrderService {
     if (productList.containsKey(productId)) {
       int wantedProducts = productList.get(productId).getStock();
       wantedProducts++;
-      if (wantedProducts < productsDb.getProductById(productId).getStock()) {
+      if (wantedProducts <= productsDb.getProductById(productId).getStock()) {
         productList.get(productId).setStock(wantedProducts);
         return ordersDb.updateOrder(order);
       } else {
@@ -67,7 +67,11 @@ public class OrderService {
   }
 
   public boolean resetOrder() {
-    return ordersDb.resetOrder();
+    return ordersDb.resetOrder(new Client());
+  }
+
+  public boolean resetOrder(Client client) {
+    return ordersDb.resetOrder(client);
   }
 
   public void asignClient(Client newClient) {

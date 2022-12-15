@@ -15,8 +15,8 @@
                     <a class="nav-link" href="./auth?exit=true">Salir</a>
                 </c:if>
                 <c:if test="${empty requestScope.clientName}">
-                    <a class="nav-link" href="auth-form.jsp">Identificarme</a>
-                    <a class="nav-link" href="auth-form.jsp?register=true">Registrarme</a>
+                    <a class="nav-link" href="./auth">Identificarme</a>
+                    <a class="nav-link" href="./auth?register=true">Registrarme</a>
                 </c:if>
                 <c:if test="${requestScope.productsNumber != 0}">
                     <a class="nav-link" href="./order">Ver Cesta <span class="badge badge-pill bg-success">${requestScope.productsNumber}</span></a>

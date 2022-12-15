@@ -44,9 +44,9 @@ public class OrderDAO {
     }
   }
 
-  public boolean resetOrder() {
+  public boolean resetOrder(Client client) {
     ORDER_DATA.setProductList(new HashMap<Integer, Product>());
-    ORDER_DATA.setOwner(new Client());
+    ORDER_DATA.setOwner(client);
     return true;
   }
 
