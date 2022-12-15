@@ -12,7 +12,12 @@
               <div class="navbar-nav">
                 <a class="nav-link" href="auth-form.jsp">Identificarme</a>
                 <a class="nav-link" href="auth-form.jsp?register=true">Registrarme</a>
-                <a class="nav-link" href="./order">Ver Cesta</a>
+                <c:if test="${requestScope.productsNumber != 0}">
+                    <a class="nav-link" href="./order">Ver Cesta <span class="badge badge-pill bg-success">${requestScope.productsNumber}</span></a>
+                </c:if>
+                <c:if test="${requestScope.productsNumber == 0}">
+                    <a class="nav-link disabled" href="./order">Ver Cesta</a>
+                </c:if>
               </div>
             </div>
           </div>

@@ -39,6 +39,12 @@ public class OrderService {
     }
   }
 
+  public int getNumOfItems() {
+    Order order = getOrder();
+    HashMap<Integer, Product> productList = order.getProductList();
+    return productList.values().stream().mapToInt(product -> product.getStock()).sum();
+  }
+
   public Order getOrder() {
     return ordersDb.getOrder();
   }

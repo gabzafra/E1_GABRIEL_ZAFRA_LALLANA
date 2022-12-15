@@ -22,11 +22,11 @@
         <fmt:formatNumber var="subtotal" value="${(order.value.price * order.value.stock)}"  maxFractionDigits="2" />
              <c:set var = "total" scope = "page" value = "${(total + (order.value.price * order.value.stock))}"/>
              <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-center">
-                <span class="display-6 text-capitalize">${order.value.name} - ${order.value.stock} <span class="text-lowercase">x</span> ${order.value.price}€</span><span class="display-6 text-capitalize">${subtotal}</span></li>
+                <span class="display-6 text-capitalize">${order.value.name} - ${order.value.stock} <span class="text-lowercase">x</span> ${order.value.price}</span><span class="display-6 text-capitalize">${subtotal}€</span></li>
         </c:forEach>
         <fmt:formatNumber var="total" value="${total}"  maxFractionDigits="2" />
         <li class="list-group-item text-bg-success d-flex justify-content-between align-items-center">
-                <span class="display-5 text-capitalize">Total: </span><span class="display-5 text-capitalize">${total}</span></li>
+                <span class="display-5 text-capitalize">Total: </span><span class="display-5 text-capitalize">${total}€</span></li>
         </ul>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

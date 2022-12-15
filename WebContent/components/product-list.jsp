@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <p class="card-text">${product.value.description}</p>
                     <p class="display-5">${product.value.price}€</p>
-                    <a href="./product?id=${product.value.id}" class="btn btn-success">Añadir a la cesta</a>
+                    <a href="./order?id=${product.value.id}" class="btn btn-success">Añadir a la cesta</a>
                 </div>
             </div>
             </div>

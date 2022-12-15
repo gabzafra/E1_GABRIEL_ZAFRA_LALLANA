@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dam2.e1.tienda.config.WebConfig;
 import dam2.e1.tienda.model.Product;
+import dam2.e1.tienda.service.OrderService;
 import dam2.e1.tienda.service.ProductService;
 
 /**
@@ -18,6 +19,7 @@ import dam2.e1.tienda.service.ProductService;
 public class ProductsController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private ProductService pService;
+  private OrderService oService;
   private final WebConfig WEB_CONFIG = WebConfig.getConfig();
 
 
@@ -32,6 +34,9 @@ public class ProductsController extends HttpServlet {
     if (pService == null) {
       pService = new ProductService();
     }
+    if (oService == null) {
+      oService = new OrderService();
+    }
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +44,7 @@ public class ProductsController extends HttpServlet {
     initBackServices(request);
 
     HashMap<Integer, Product> productList = pService.getProductsInStock();
-
+    request.setAttribute("productsNumber", oService.getNumOfItems());
     request.setAttribute("list", productList);
     request.getRequestDispatcher("index.jsp").forward(request, response);
   }

@@ -32,13 +32,17 @@ public class OrdersController extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     initBackServices(request);
-    oService.addProductToOrder(1);
-    oService.addProductToOrder(1);
-    oService.addProductToOrder(3);
-    oService.addProductToOrder(4);
-    Order order = oService.getOrder();
-    request.setAttribute("orders", order.getProductList());
-    request.getRequestDispatcher("order.jsp").forward(request, response);
+    String productId = request.getParameter("id");
+    if (productId != null) {
+      oService.addProductToOrder(Integer.parseInt(productId));
+      request.getRequestDispatcher("./").forward(request, response);
+    } else {
+      Order order = oService.getOrder();
+
+      request.setAttribute("productsNumber", oService.getNumOfItems());
+      request.setAttribute("orders", order.getProductList());
+      request.getRequestDispatcher("order.jsp").forward(request, response);
+    }
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
