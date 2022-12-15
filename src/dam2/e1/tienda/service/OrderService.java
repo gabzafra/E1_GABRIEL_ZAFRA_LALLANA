@@ -14,11 +14,6 @@ public class OrderService {
   private OrderDAO ordersDb = OrderDAO.getInstance();
   private ProductDAO productsDb = new ProductDAO();
 
-
-  public void generatePdfInvoice() {
-    System.out.println("CREANDO EL PDF");
-  }
-
   public Order addProductToOrder(int productId) {
     Order order = getOrder();
     HashMap<Integer, Product> productList = order.getProductList();

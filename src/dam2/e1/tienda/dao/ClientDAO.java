@@ -18,8 +18,6 @@ public class ClientDAO {
   public ClientDAO() {
     localFile = new File(WebConfig.getConfig().getGlobalPath() + File.separator + "files"
         + File.separator + "usuarios.txt");
-    System.out.println(localFile);
-    System.out.println(WebConfig.getConfig().getGlobalPath());
     initDAO();
   }
 

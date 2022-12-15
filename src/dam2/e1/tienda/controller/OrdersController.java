@@ -10,11 +10,13 @@ import dam2.e1.tienda.config.WebConfig;
 import dam2.e1.tienda.model.Client;
 import dam2.e1.tienda.model.Order;
 import dam2.e1.tienda.service.OrderService;
+import dam2.e1.tienda.service.PdfService;
 
 @WebServlet("/order")
 public class OrdersController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private OrderService oService;
+  private PdfService pService;
   private final WebConfig WEB_CONFIG = WebConfig.getConfig();
 
   public OrdersController() {
@@ -27,6 +29,9 @@ public class OrdersController extends HttpServlet {
     }
     if (oService == null) {
       oService = new OrderService();
+    }
+    if (pService == null) {
+      pService = new PdfService();
     }
   }
 
@@ -50,7 +55,7 @@ public class OrdersController extends HttpServlet {
       // El usuario existe
       if (currentOrder.getOwner().getId() > 0) {
         oService.completeOrder();
-        oService.generatePdfInvoice();
+        pService.generatePdfInvoice();
         oService.resetOrder(currentOrder.getOwner());
         // TODO enviar este request al pdf
         request.getRequestDispatcher("./").forward(request, response);
