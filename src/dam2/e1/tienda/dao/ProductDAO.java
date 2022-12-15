@@ -43,11 +43,16 @@ public class ProductDAO {
       }
     }
     if (isEmpty) {
-      createNewProduct(new Product(getNewId(), "judias", "la desc 1", 1.11, 11));
-      createNewProduct(new Product(getNewId(), "cerveza", "la desc 2", 2.22, 22));
-      createNewProduct(new Product(getNewId(), "lechuga", "la desc 3", 3.33, 0));
-      createNewProduct(new Product(getNewId(), "leche", "la desc 4", 4.33, 43));
-      createNewProduct(new Product(getNewId(), "yogourt", "la desc 5", 5.33, 53));
+      createNewProduct(
+          new Product(getNewId(), "judias", "Probalemente las mejores judias del mundo", 0.76, 11));
+      createNewProduct(
+          new Product(getNewId(), "cerveza", "Tu compañera en estos dias de examenes", 3.78, 3));
+      createNewProduct(
+          new Product(getNewId(), "lechuga", "La salud no está reñida con la redondez", 0.35, 5));
+      createNewProduct(new Product(getNewId(), "leche",
+          "Oferta en packs de seis, llevatelos por el precio de media docena", 9.33, 22));
+      createNewProduct(
+          new Product(getNewId(), "yogourt", "Nadie en su sano juicio compra esto", 2.8, 1));
     }
   }
 
