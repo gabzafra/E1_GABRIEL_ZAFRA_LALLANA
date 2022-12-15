@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dam2.e1.tienda.config.WebConfig;
+import dam2.e1.tienda.model.Client;
 import dam2.e1.tienda.model.Product;
 import dam2.e1.tienda.service.OrderService;
 import dam2.e1.tienda.service.ProductService;
@@ -45,6 +46,10 @@ public class ProductsController extends HttpServlet {
 
     HashMap<Integer, Product> productList = pService.getProductsInStock();
     request.setAttribute("productsNumber", oService.getNumOfItems());
+    Client client = oService.getOrder().getOwner();
+    if (client.getId() > 0) {
+      request.setAttribute("clientName", client.getName());
+    }
     request.setAttribute("list", productList);
     request.getRequestDispatcher("index.jsp").forward(request, response);
   }

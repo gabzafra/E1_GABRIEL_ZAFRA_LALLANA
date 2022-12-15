@@ -36,32 +36,41 @@ public class AuthController extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    response.getWriter().append("Served at: ").append(request.getContextPath());
+    initBackServices(request);
+    oService.resetOrder();
+    response.sendRedirect(request.getContextPath());
   }
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     initBackServices(request);
+    Client client = new Client(request.getParameter("email"), request.getParameter("pass"),
+        request.getParameter("name"), request.getParameter("surnames"),
+        request.getParameter("phone"));
     if (request.getParameter("register") != null) {
-      Client newClient = new Client(request.getParameter("email"), request.getParameter("pass"),
-          request.getParameter("name"), request.getParameter("surnames"),
-          request.getParameter("phone"));
-      String errorMsg = cService.validateRegister(newClient, request.getParameter("pass2"));
+      String errorMsg = cService.validateRegister(client, request.getParameter("pass2"));
       if (errorMsg.isEmpty()) {
-        newClient = cService.registerNewClient(newClient);
-        oService.asignClient(newClient);
+        client = cService.registerNewClient(client);
+        oService.asignClient(client);
         response.sendRedirect(request.getContextPath());
       } else {
         request.setAttribute("error", errorMsg);
-        request.setAttribute("client", newClient);
+        request.setAttribute("client", client);
         request.setAttribute("register", true);
         request.getRequestDispatcher("auth-form.jsp").forward(request, response);
       }
     } else {
-      String email = request.getParameter("email");
-      String pass = request.getParameter("pass");
-      String errorMsg = cService.validateLogin(email, pass);
+      String errorMsg = cService.validateLogin(client.getEmail(), client.getPassword());
+      if (errorMsg.isEmpty()) {
+        client = cService.getClientByEmail(client.getEmail());
+        oService.asignClient(client);
+        response.sendRedirect(request.getContextPath());
+      } else {
+        request.setAttribute("error", errorMsg);
+        request.setAttribute("client", client);
+        request.getRequestDispatcher("auth-form.jsp").forward(request, response);
+      }
+
     }
   }
 
