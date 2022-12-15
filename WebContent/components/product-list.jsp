@@ -6,7 +6,7 @@
             <div class="col">
              <div class="product card text-bg-light">
                             <div class="card-header display-6 text-capitalize">${product.value.name}</div>
-                <img src="./img/${product.value.name}.jpg" class="card-img-top" alt="${product.value.name}">
+                <img src="./img/${product.value.name}.jpg" class="card-img-top w-75 mx-auto mt-2" alt="${product.value.name}">
                 <div class="card-body">
                     <p class="card-text">${product.value.description}</p>
                     <p class="display-5">${product.value.price}€</p>
