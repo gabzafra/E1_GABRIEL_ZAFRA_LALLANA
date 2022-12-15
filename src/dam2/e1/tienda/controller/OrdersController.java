@@ -60,7 +60,6 @@ public class OrdersController extends HttpServlet {
         oService.completeOrder();
         pService.generatePdfInvoice();
         oService.resetOrder(currentOrder.getOwner());
-        // TODO enviar este request al pdf
         request.getRequestDispatcher("./").forward(request, response);
       } else {
         // El usuario no existe
