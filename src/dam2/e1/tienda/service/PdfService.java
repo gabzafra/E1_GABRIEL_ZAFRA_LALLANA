@@ -86,11 +86,10 @@ public class PdfService {
 
     Font blackFont = FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
 
-    Chunk row =
-        new Chunk(
-            producto.getName() + " " + producto.getStock() + " unidades " + producto.getPrice()
-                + "€ por unidad -> " + (producto.getPrice() * producto.getStock()) + " €.",
-            blackFont);
+    String subtotal = roundDouble(producto.getPrice() * producto.getStock());
+
+    Chunk row = new Chunk(producto.getName() + " " + producto.getStock() + " unidades "
+        + producto.getPrice() + "€ por unidad -> " + subtotal + " €.", blackFont);
 
     text.add(row);
 
@@ -104,6 +103,10 @@ public class PdfService {
   private String getTotalPrice() {
     double total = ordersDb.getOrder().getProductList().values().stream()
         .mapToDouble(p -> p.getPrice() * p.getStock()).sum();
-    return String.format("%.2f", total);
+    return roundDouble(total);
+  }
+
+  private static String roundDouble(double n) {
+    return String.format("%.2f", n);
   }
 }
