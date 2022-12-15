@@ -36,7 +36,25 @@ public class OrdersController extends HttpServlet {
     if (productId != null) {
       oService.addProductToOrder(Integer.parseInt(productId));
       request.getRequestDispatcher("./").forward(request, response);
+    } else if (request.getParameter("clear") != null) {
+      oService.resetOrder();
+      request.getRequestDispatcher("./").forward(request, response);
+    } else if (request.getParameter("complete") != null) {
+      Order currentOrder = oService.getOrder();
+      // El usuario existe
+      if (currentOrder.getOwner().getId() > 0) {
+        oService.completeOrder();
+        oService.generatePdfInvoice();
+        oService.resetOrder();
+        // TODO enviar este request al pdf
+        request.getRequestDispatcher("./").forward(request, response);
+      } else {
+        // El usuario no existe
+        request.setAttribute("productsNumber", oService.getNumOfItems());
+        request.getRequestDispatcher("auth-form.jsp").forward(request, response);
+      }
     } else {
+
       Order order = oService.getOrder();
 
       request.setAttribute("productsNumber", oService.getNumOfItems());

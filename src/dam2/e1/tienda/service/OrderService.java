@@ -14,6 +14,10 @@ public class OrderService {
   private ProductDAO productsDb = new ProductDAO();
 
 
+  public void generatePdfInvoice() {
+    System.out.println("CREANDO EL PDF");
+  }
+
   public Order addProductToOrder(int productId) {
     Order order = getOrder();
     HashMap<Integer, Product> productList = order.getProductList();
@@ -37,6 +41,18 @@ public class OrderService {
         return ordersDb.updateOrder(order);
       }
     }
+  }
+
+  public void completeOrder() {
+    Order order = getOrder();
+    order.getProductList().values().forEach(product -> updateProductStock(product));
+  }
+
+  private void updateProductStock(Product product) {
+    Product storedProduct = productsDb.getProductById(product.getId());
+    int newStock = storedProduct.getStock() - product.getStock();
+    storedProduct.setStock(newStock);
+    productsDb.updateProduct(storedProduct);
   }
 
   public int getNumOfItems() {
