@@ -18,15 +18,25 @@
             <form action="<%=request.getContextPath()%>/auth" method="POST">
         </c:if>
         <c:if test="${!empty param.register}">
-            <form action="<%=request.getContextPath()%>/auth?new=true" method="POST">
+            <form action="<%=request.getContextPath()%>/auth?register=true" method="POST">
         </c:if>
             <fieldset>
                 <c:if test="${empty param.register}">
                     <legend>Datos de acceso</legend>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="email" placeholder="Email"
+                            value="${requestScope.client.email}">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" name="pass" placeholder="Contraseña"
+                            value="">
+                            <label for="pass">Contraseña</label>
+                        </div>
                 </c:if>
                 <c:if test="${!empty param.register}">
                     <legend>Nuevo cliente</legend>
-                </c:if>
+                
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="name" placeholder="Nombre"
                         value="${requestScope.client.name}">
@@ -43,10 +53,21 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="phone" placeholder="TelÃ©fono"
+                    <input type="number" class="form-control" name="phone" placeholder="Teléfono"
                         value="${requestScope.client.phone}">
                     <label for="phone">Teléfono</label>
                 </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="pass" placeholder="Contraseña"
+                        value="">
+                    <label for="pass">Contraseña</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" name="pass2" placeholder="Contraseña"
+                        value="">
+                    <label for="pass2">Repita Contraseña</label>
+                </div>
+                </c:if>
                 <c:if test="${empty param.register}">
                     <button type="submit" class="btn btn-primary">Entrar</button>
                 </c:if>

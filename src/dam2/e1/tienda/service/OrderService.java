@@ -6,6 +6,7 @@ package dam2.e1.tienda.service;
 import java.util.HashMap;
 import dam2.e1.tienda.dao.OrderDAO;
 import dam2.e1.tienda.dao.ProductDAO;
+import dam2.e1.tienda.model.Client;
 import dam2.e1.tienda.model.Order;
 import dam2.e1.tienda.model.Product;
 
@@ -67,5 +68,19 @@ public class OrderService {
 
   public boolean resetOrder() {
     return ordersDb.resetOrder();
+  }
+
+  public void asignClient(Client newClient) {
+    Order order = getOrder();
+    if (order.getOwner().getId() > 0) {
+      resetOrder();
+      order = getOrder();
+      order.setOwner(newClient);
+      ordersDb.updateOrder(order);
+    } else {
+      order.setOwner(newClient);
+      ordersDb.updateOrder(order);
+    }
+
   }
 }
