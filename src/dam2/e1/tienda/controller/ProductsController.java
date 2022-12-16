@@ -47,7 +47,7 @@ public class ProductsController extends HttpServlet {
       throws ServletException, IOException {
     initBackServices(request);
 
-    HashMap<Integer, Product> productList = pService.getProductsInStock();
+    HashMap<Integer, Product> productList = pService.getProductsInStock(oService.getOrder());
     request.setAttribute("productsNumber", oService.getNumOfItems());
     Client client = oService.getOrder().getOwner();
     if (client.getId() > 0) {
