@@ -2,7 +2,7 @@ repo https://github.com/gabzafra/E1_GABRIEL_ZAFRA_LALLANA
 
 En este ejercicio he desarrollado todos los puntos pedidos, incluidos los de ampliación. En total he empleado aproximadamente unas doce horas.
 
-La aplicación es una tienda web en que nos muestra inicialmente una lista de productos. Estos productos se presentan en tarjetas individuales con información del mismo, incluida su disponibilidad y precio. Cada tarjeta tiene un botón que permite añadir una unidad del producto a una cesta de la compra, siempre que no se sobrepase el inventario existente.
+La aplicación es una tienda web en que nos muestra inicialmente una lista de productos. Estos productos se presentan en tarjetas individuales con información del mismo, incluida su disponibilidad y precio. Cada tarjeta tiene un botón que permite añadir una unidad del producto a una cesta de la compra, siempre que no se sobrepase el inventario existente. Cada vez que añadimos un producto la disponibilidad de ese producto se actualiza en el escaparate.
 
 En la parte superior hay una barra de navegación, que es común a todas las vistas de la aplicación. Inicialmente esta barra nos proporciona enlaces tanto a la vista inicial, al formulario de login y al de registro. Además tiene un enlace desactivado a la vista de la cesta de la compra. Cuando se añade algún producto a la cesta el enlace se activa, y muestra a su lado un indicador de cuantos productos hay en la cesta.
 
