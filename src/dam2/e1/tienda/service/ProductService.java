@@ -12,10 +12,6 @@ import dam2.e1.tienda.model.Product;
 public class ProductService {
   private ProductDAO db = new ProductDAO();
 
-  public HashMap<Integer, Product> getAllProducts() {
-    return db.getAllProducts();
-  }
-
   public HashMap<Integer, Product> getProductsInStock() {
     return (HashMap<Integer, Product>) db.getAllProducts().entrySet().stream()
         .filter(entry -> entry.getValue().getStock() > 0)

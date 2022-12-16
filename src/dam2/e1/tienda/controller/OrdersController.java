@@ -79,12 +79,4 @@ public class OrdersController extends HttpServlet {
       request.getRequestDispatcher("order.jsp").forward(request, response);
     }
   }
-
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    // doGet(request, response);
-    System.out.println("post -> order");
-  }
-
 }
